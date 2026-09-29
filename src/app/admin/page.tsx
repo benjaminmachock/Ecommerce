@@ -18,7 +18,7 @@ export default async function AdminProducts() {
       <dl className="stats">
         <div><dt>Live products</dt><dd>{live}</dd></div>
         <div><dt>Archived</dt><dd>{products.length - live}</dd></div>
-        <div><dt>Orders</dt><dd>{orderCount}</dd></div>
+        <div><dt>Orders</dt><dd><Link href="/admin/orders">{orderCount}</Link></dd></div>
         <div><dt>Paid revenue</dt><dd>{formatPrice(paid._sum.totalCents ?? 0)}</dd></div>
       </dl>
       <p><Link href="/admin/products/new" className="btn btn-accent">+ New product</Link></p>

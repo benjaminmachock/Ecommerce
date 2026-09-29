@@ -41,3 +41,8 @@ export const productSchema = z.object({
   featured: z.boolean(),
   active: z.boolean(),
 });
+
+export const orderUpdateSchema = z.object({
+  status: z.enum(["PENDING", "PAID", "SHIPPED", "CANCELLED"]),
+  trackingNumber: z.string().trim().max(60).regex(/^[A-Za-z0-9 -]*$/, "Letters, numbers, spaces and dashes only").optional(),
+});

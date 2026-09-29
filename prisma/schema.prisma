@@ -57,6 +57,8 @@ model Order {
   status          OrderStatus @default(PENDING)
   totalCents      Int
   stripeSessionId String?     @unique
+  trackingNumber  String?
+  shippedAt       DateTime?
   createdAt       DateTime    @default(now())
   items           OrderItem[]
 

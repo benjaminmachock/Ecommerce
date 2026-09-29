@@ -32,6 +32,7 @@ export default async function Account() {
                 <span className="muted">{o.createdAt.toLocaleDateString("en-US")}</span>
                 <b className="push">{formatPrice(o.totalCents)}</b>
               </div>
+              {o.trackingNumber && <p className="muted small">Tracking: {o.trackingNumber}</p>}
               <ul>{o.items.map((i) => <li key={i.id}>{i.quantity} × {i.product.name} — {i.color} / {i.size}</li>)}</ul>
             </li>
           ))}

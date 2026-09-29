@@ -236,6 +236,11 @@
   .admin-main { display: grid; gap: 0.15rem; justify-items: start; a { text-decoration: none; } .tags { display: flex; gap: 0.4rem; } }
   .admin-actions { grid-column: 1 / -1; display: flex; flex-wrap: wrap; gap: 0.4rem; @media (min-width: 50rem) { grid-column: auto; } }
   .btn.sm { padding: 0.4rem 0.9rem; font-size: 0.85rem; border-width: 1.5px; &.danger { color: oklch(52% 0.2 25); border-color: currentColor; } }
+  .order-row { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 1rem; padding: 0.9rem 1.1rem; border: 1px solid var(--line); border-radius: var(--radius); a { text-decoration: none; } .push { margin-left: auto; } }
+  .pill[data-status="SHIPPED"] { background: oklch(85% 0.09 235); color: oklch(25% 0.06 235); }
+  .pill[data-status="CANCELLED"] { background: oklch(85% 0.1 25); color: oklch(30% 0.1 25); }
+  .order-detail { display: grid; gap: 2rem; margin-top: 1.5rem; @media (min-width: 55rem) { grid-template-columns: 1fr 22rem; align-items: start; } }
+  .order-total { display: flex; justify-content: space-between; padding-top: 1rem; font-size: 1.2rem; }
   .product-form { display: grid; gap: 2rem; margin-top: 1.5rem; @media (min-width: 60rem) { grid-template-columns: 1fr 26rem; align-items: start; } }
   .pf-fields { display: grid; gap: 1.1rem; label { display: grid; gap: 0.35rem; font-weight: 600; } input:not([type="checkbox"]):not([type="radio"]), textarea, select { padding: 0.8rem 1rem; border-radius: 0.8rem; border: 1.5px solid var(--line); background: var(--paper); font: inherit; font-weight: 400; &[aria-invalid="true"] { border-color: oklch(52% 0.2 25); } } small { font-weight: 400; } .swatch, .size { display: block; } }
   .pf-two { display: grid; gap: 1rem; @media (min-width: 35rem) { grid-template-columns: 1fr 1fr; } }
