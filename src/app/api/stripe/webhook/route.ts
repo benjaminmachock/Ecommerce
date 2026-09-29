@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { db } from "@/lib/db";
+import { sendOrderConfirmation } from "@/lib/order-email";
 import { stripe } from "@/lib/stripe";
 
 export const runtime = "nodejs";
@@ -41,6 +42,9 @@ export async function POST(req: Request) {
         where: { stripeSessionId: s.id, status: "PENDING" },
         data: { status: "PAID" },
       });
+      // Runs for retries too; it is a no-op once the email has gone out.
+      const order = await db.order.findUnique({ where: { stripeSessionId: s.id }, select: { id: true } });
+      if (order) await sendOrderConfirmation(order.id);
     }
   }
   return NextResponse.json({ received: true });

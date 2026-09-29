@@ -3,6 +3,7 @@
 import { redirect } from "next/navigation";
 import { auth } from "@/auth";
 import { db } from "@/lib/db";
+import { sendOrderConfirmation } from "@/lib/order-email";
 import { rateLimit } from "@/lib/rate-limit";
 import { stripe } from "@/lib/stripe";
 import { cartSchema } from "@/lib/validation";
@@ -57,6 +58,7 @@ export async function startCheckout(rawCart: unknown): Promise<CheckoutResult> {
   if (!stripe) {
     // Demo mode: no Stripe keys configured, so mark paid immediately.
     await db.order.update({ where: { id: order.id }, data: { status: "PAID" } });
+    await sendOrderConfirmation(order.id);
     return { url: `${origin}/checkout/success?order=${order.id}&demo=1` };
   }
 
