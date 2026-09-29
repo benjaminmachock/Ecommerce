@@ -39,6 +39,18 @@ export default async function AdminOrder({ params }: { params: Promise<{ id: str
           <p><b>{order.user.name}</b><br /><span className="muted">{order.user.email}</span></p>
           <p className="muted small">Placed {order.createdAt.toLocaleString("en-US")}{order.shippedAt && <><br />Shipped {order.shippedAt.toLocaleString("en-US")}</>}</p>
           {order.stripeSessionId && <p className="muted small">Stripe session: {order.stripeSessionId.slice(0, 18)}…</p>}
+          <h2>Ship to</h2>
+          {order.shipLine1 ? (
+            <address className="ship">
+              <b>{order.shipName}</b><br />
+              {order.shipLine1}<br />
+              {order.shipLine2 && <>{order.shipLine2}<br /></>}
+              {order.shipCity}, {order.shipState} {order.shipPostalCode}<br />
+              {order.shipCountry}
+            </address>
+          ) : (
+            <p className="muted small">No address on file (demo-mode orders skip Stripe).</p>
+          )}
           <h2>Fulfillment</h2>
           <OrderStatusForm id={order.id} status={order.status} trackingNumber={order.trackingNumber ?? ""} />
         </aside>

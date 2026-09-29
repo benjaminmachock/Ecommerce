@@ -29,6 +29,7 @@ Register on the site, then promote yourself: `npm run make-admin -- you@example.
 - Zod validation on all inputs; prices are re-read from the database at checkout, never trusted from the client.
 - Orders are always queried by the signed-in user's id; open redirects blocked on `next=`.
 - Per-request CSP nonce (`src/proxy.ts`), HSTS, frame denial, nosniff, referrer and permissions policies.
+- The Stripe webhook saves the shipping address collected at checkout onto the order.
 - Stripe webhook verifies the signature against the raw body.
 - Sessions are signed JWT cookies (HttpOnly, SameSite=Lax; Secure in production). Auth.js Credentials requires JWT sessions.
 - Set `AUTH_URL` in production. `x-forwarded-for` is only trustworthy behind your own proxy.

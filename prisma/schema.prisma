@@ -58,6 +58,14 @@ model Order {
   totalCents      Int
   stripeSessionId String?     @unique
   trackingNumber  String?
+  // Shipping address copied from the Stripe Checkout session by the webhook.
+  shipName        String?
+  shipLine1       String?
+  shipLine2       String?
+  shipCity        String?
+  shipState       String?
+  shipPostalCode  String?
+  shipCountry     String?
   shippedAt       DateTime?
   createdAt       DateTime    @default(now())
   items           OrderItem[]

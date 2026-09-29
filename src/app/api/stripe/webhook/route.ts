@@ -20,6 +20,23 @@ export async function POST(req: Request) {
   if (event.type === "checkout.session.completed") {
     const s = event.data.object;
     if (s.payment_status === "paid") {
+      const ship = s.collected_information?.shipping_details;
+      const clip = (v: string | null | undefined, n = 200) => v?.slice(0, n) || null;
+      // Address is saved even if the order was already marked paid (e.g. a webhook retry).
+      if (ship) {
+        await db.order.updateMany({
+          where: { stripeSessionId: s.id },
+          data: {
+            shipName: clip(ship.name),
+            shipLine1: clip(ship.address.line1),
+            shipLine2: clip(ship.address.line2),
+            shipCity: clip(ship.address.city, 100),
+            shipState: clip(ship.address.state, 100),
+            shipPostalCode: clip(ship.address.postal_code, 20),
+            shipCountry: clip(ship.address.country, 2),
+          },
+        });
+      }
       await db.order.updateMany({
         where: { stripeSessionId: s.id, status: "PENDING" },
         data: { status: "PAID" },
