@@ -60,6 +60,7 @@ model Order {
   trackingNumber  String?
   // Set atomically before sending so a webhook retry can never send a second email.
   confirmationSentAt DateTime?
+  shippedEmailSentAt DateTime?
   // Shipping address copied from the Stripe Checkout session by the webhook.
   shipName        String?
   shipLine1       String?

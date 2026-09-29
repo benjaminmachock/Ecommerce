@@ -48,7 +48,7 @@ Without Stripe keys, checkout runs in **demo mode** (orders are marked paid, no 
 
 ## Order emails
 
-A confirmation email goes to the customer when an order becomes paid (Stripe webhook, or immediately in demo mode). Set `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` and `EMAIL_FROM` in `.env` to use any SMTP provider (Resend, Postmark, SES, Gmail app password…). With `SMTP_HOST` empty, emails are printed to the server log. To preview them locally: `brew install mailpit && mailpit`, set `SMTP_HOST=localhost SMTP_PORT=1025`, and open http://localhost:8025.
+Two emails go to the customer: a confirmation when an order becomes paid (Stripe webhook, or immediately in demo mode), and a shipped notice with the tracking number when an admin marks the order shipped. Each is sent at most once per order. Set `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS` and `EMAIL_FROM` in `.env` to use any SMTP provider (Resend, Postmark, SES, Gmail app password…). With `SMTP_HOST` empty, emails are printed to the server log. To preview them locally: `brew install mailpit && mailpit`, set `SMTP_HOST=localhost SMTP_PORT=1025`, and open http://localhost:8025.
 
 ## Admin area
 
