@@ -74,3 +74,7 @@ The app runs on Vercel with a Neon Postgres database. `npm run vercel-build` app
 ## Layout
 
 `src/lib/artwork.tsx` holds the animated SVG tee designs, `src/components/hero-carousel.tsx` the home carousel, `src/actions` the server actions, and `prisma/` the schema and seed.
+
+## License
+
+MIT. See [LICENSE](LICENSE).
