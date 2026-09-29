@@ -1,6 +1,7 @@
 import { db } from "@/lib/db";
 import { sendMail } from "@/lib/email";
 import { formatPrice } from "@/lib/money";
+import { siteUrl } from "@/lib/site-url";
 import { orderRef } from "@/lib/orders";
 
 const esc = (s: string) =>
@@ -23,7 +24,7 @@ export async function sendOrderConfirmation(orderId: string) {
       where: { id: orderId },
       include: { user: { select: { name: true, email: true } }, items: { include: { product: true } } },
     });
-    const origin = process.env.AUTH_URL ?? "http://localhost:3000";
+    const origin = siteUrl();
     const ref = orderRef(order.id);
     const address = order.shipLine1
       ? [order.shipName, order.shipLine1, order.shipLine2, `${order.shipCity}, ${order.shipState} ${order.shipPostalCode}`, order.shipCountry].filter(Boolean) as string[]

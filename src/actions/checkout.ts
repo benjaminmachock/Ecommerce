@@ -5,6 +5,7 @@ import { auth } from "@/auth";
 import { db } from "@/lib/db";
 import { sendOrderConfirmation } from "@/lib/order-email";
 import { rateLimit } from "@/lib/rate-limit";
+import { siteUrl } from "@/lib/site-url";
 import { stripe } from "@/lib/stripe";
 import { cartSchema } from "@/lib/validation";
 
@@ -53,7 +54,7 @@ export async function startCheckout(rawCart: unknown): Promise<CheckoutResult> {
     },
   });
 
-  const origin = process.env.AUTH_URL ?? "http://localhost:3000";
+  const origin = siteUrl();
 
   if (!stripe) {
     // Demo mode: no Stripe keys configured, so mark paid immediately.
